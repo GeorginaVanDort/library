@@ -36,25 +36,19 @@ public class BookTest {
     assertEquals("Literature", testBook.getGenre());
   }
 
-  // @Test
-  // public void Book_instantiatesWithPersonId_int() {
-  //   Monster testMonster = new Monster("Squeaky", 1);
-  //   assertEquals(1, testMonster.getPersonId());
-  // }
-  //
-  // @Test
-  //   public void save_returnsTrueIfDescriptionsAretheSame() {
-  //     Monster testMonster = new Monster("Squeaky", 1);
-  //     testMonster.save();
-  //     assertTrue(Monster.all().get(0).equals(testMonster));
-  // }
+  @Test
+  public void save_returnsTrueIfDescriptionsAretheSame() {
+    Book testBook = book;
+    testBook.save();
+    assertTrue(Book.all().get(0).equals(testBook));
+  }
 
-//   @Test
-//   public void equals_returnsTrueIfNameAndPersonIdAreSame_true() {
-//     Monster testMonster = new Monster("Squeaky", 1);
-//     Monster anotherMonster = new Monster("Squeaky", 1);
-//     assertTrue(testMonster.equals(anotherMonster));
-//   }
+  @Test
+  public void equals_returnsTrueIfTitleAndAuthorAreSame_true() {
+    Book testBook = book;
+    Book anotherBook = book;
+    assertTrue(testBook.equals(anotherBook));
+  }
 //
 //   @Test
 //     public void save_assignsIdToMonster() {

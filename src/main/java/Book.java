@@ -10,16 +10,22 @@ public class Book {
   private String genre;
   private boolean overdue;
   private boolean borrowedNow;
-  private int patron_id;
   private int id;
+  private Timestamp dateBorrowed;
+  private Timestamp dateReturned;
+  private Timestamp dateDue;
+  private int renewCount;
+
+  public static final int MAX_RENEW_COUNT = 2;
 
   public Book(String title, String author, String genre){
     this.title = title;
-    this.phone = author;
-    this.email = genre;
+    this.author = author;
+    this.genre = genre;
+    this.renewCount = 0;
     this.overdue = false;
     this.borrowedNow = false;
-    this.patron_id;
+    this.renewCount = 0;
   }
 
   public String getTitle() {
@@ -30,10 +36,6 @@ public class Book {
     return author;
   }
 
-  public int getPatronId() {
-    return patron_id;
-  }
-
   public int getId() {
     return id;
   }
@@ -42,21 +44,51 @@ public class Book {
     return genre;
   }
 
-    @Override
-    public boolean equals(Object otherBook) {
-      if(!(otherBook instanceof Book)) {
-        return false;
-      } else{
-        Book newBook = (Book) otherBook;
-        return this.getTitle().equals(newBook.getTitle()) &&
-              this.getAuthor().equals(newBook.getAuthor());
-      }
-    }
+  public int getRenewCount(){
+    return renewCount;
+  }
 
-  public void save () {
+  public boolean getBorrowedNow(){
+    return borrowedNow;
+  }
+  public Timestamp getDateBorrowed(){
+  return dateBorrowed;
+  }
+
+  public Timestamp getDateDue(){
+  return dateDue;
+  }
+
+  public static List<Book> all() {
+    String sql = "SELECT * FROM books";
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO books (title, author, genre, patron_id, borrowedNow, overdue)"
+     return con.createQuery(sql).executeAndFetch(Book.class);
     }
   }
 
+  @Override
+  public boolean equals(Object otherBook) {
+    if(!(otherBook instanceof Book)) {
+      return false;
+    } else{
+      Book newBook = (Book) otherBook;
+      return this.getTitle().equals(newBook.getTitle()) &&
+            this.getAuthor().equals(newBook.getAuthor());
+    }
+  }
+
+  public void save () {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO books (title, author, genre, overdue, borrowednow, renewcount) values (:title, :author, :genre, :overdue, :borrowedNow, :renewCount)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("title", this.title)
+      .addParameter("author", this.author)
+      .addParameter("genre", this.genre)
+      .addParameter("overdue", this.overdue)
+      .addParameter("borrowedNow", this.borrowedNow)
+      .addParameter("renewCount", this.renewCount)
+      .executeUpdate()
+      .getKey();
+    }
+  }
 }

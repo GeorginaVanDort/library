@@ -41,3 +41,4 @@ public class Patron {
             this.getEmail().equals(newPatron.getEmail());
     }
   }
+}

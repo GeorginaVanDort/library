@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PatronTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-09-27T23:46:11" hostname="epicodus-12.local" time="0.023">
+  <properties/>
+  <testcase name="getName_patronInstantiatesWithName_Fred" classname="PatronTest" time="0.007"/>
+  <testcase name="getName_patronInstantiatesWithPhone_String" classname="PatronTest" time="0.005"/>
+  <testcase name="patron_instantiatesCorrectly_True" classname="PatronTest" time="0.005"/>
+  <testcase name="getName_patronInstantiatesWithEmail_String" classname="PatronTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

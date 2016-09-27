@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.Arrays;
 
-public class PersonTest {
+public class PatronTest {
 
   @Rule
   public DatabaseRule database = new DatabaseRule();
